@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
+#include <ncurses.h>
 
 class Entity {
   public:

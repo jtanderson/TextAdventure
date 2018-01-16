@@ -16,15 +16,15 @@ void LivingEntity::heal(int h){
 };
 
 void LivingEntity::printStats(){
-  std::cout << "====== STATS ======\n";
-  std::cout << "Type:     "  << type << std::endl;
-  std::cout << "Name:     "  << name << std::endl;
-  std::cout << "HP Max:   "  << hp_max << std::endl;
-  std::cout << "HP Curr:  " << hp_curr << std::endl;
-  std::cout << "Atk Mod:  " << atk_mod << std::endl;
-  std::cout << "Armor:    " << armor << std::endl;
-  std::cout << "Damage:   " << dmg << std::endl;
-  std::cout << "===================\n";
+  printw("====== STATS ======\n");
+  printw("Type:     %s\n", type.c_str());
+  printw("Name:     %s\n", name.c_str());
+  printw("HP Max:   %d\n", hp_max);
+  printw("HP Curr:  %d\n", hp_curr);
+  printw("Atk Mod:  %d\n", atk_mod);
+  printw("Armor:    %d\n", armor);
+  printw("Damage:   %d\n", dmg);
+  printw("===================\n");
 };
 
 void LivingEntity::attack(LivingEntity& enemy){
@@ -32,13 +32,13 @@ void LivingEntity::attack(LivingEntity& enemy){
   // TODO: text return/output
   int atk_roll = rand() % 20 + 1;
 
-  std::cout << this->name << " rolled " << atk_roll << std::endl;
+  printw("%s rolled %d\n", this->name.c_str(), atk_roll);
 
   if (atk_roll + atk_mod > enemy.armor + 10){
-    std::cout << this->name << " hits " << enemy.name << std::endl;
+    printw("%s hits %s\n", this->name.c_str(), enemy.name.c_str());
     enemy.hp_curr -= this->dmg;
   } else {
-    std::cout << this->name << " misses " << enemy.name << std::endl;
+    printw("%s misses %s\n", this->name.c_str(), enemy.name.c_str());
   }
 };
 

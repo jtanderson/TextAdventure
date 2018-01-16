@@ -2,6 +2,7 @@
 #include <stack>
 #include <stdlib.h>
 #include <time.h>
+#include <ncurses.h>
 #include "gamestate.h"
 #include "travelstate.h"
 #include "idlestate.h"
@@ -9,15 +10,18 @@
 #include "entity.h" // Player
 
 int main(){
-  std::string input;
+  char input;
   std::stack<GameState*> stateStack;
   Player pc(20,5,10,5,"Human","Jimbo");
   int combatRoll;
   CombatState* cs;
 
+  initscr();
+  noecho();
+
   srand(time(0));
 
-  system("clear");
+  clear();
 
   GameState* currentState = nullptr;
   TravelState* t = new TravelState("North");
@@ -29,7 +33,7 @@ int main(){
     if (currentState->combatProbability > 0){
       combatRoll = rand() % 100 + 1;
       if (combatRoll < currentState->combatProbability){
-        std::cout << "You get attacked!\n";
+        printw("You get attacked!\n");
         cs = new CombatState();
         stateStack.push(cs);
         currentState = cs;
@@ -37,8 +41,14 @@ int main(){
     }
 
     currentState->printOptions();
-    std::getline(std::cin, input);
-    system("clear");
-    currentState->handleInput(input, stateStack, pc);
+    refresh();
+    input = getch();
+    clear();
+    //printw("You pressed %c", input);
+    currentState->handleInput(atoi(&input), stateStack, pc);
   }
+
+  endwin();
+
+  return 0;
 }

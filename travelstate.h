@@ -32,7 +32,7 @@ class TravelState : public GameState {
 
     void printOptions() override;
 
-    void handleInput(std::string, std::stack<GameState*>&, Player&) override;
+    void handleInput(int, std::stack<GameState*>&, Player&) override;
 };
 
 #endif

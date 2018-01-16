@@ -1,8 +1,9 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include<map>
-#include<stack>
+#include <map>
+#include <stack>
+#include <ncurses.h>
 #include "entity.h" // Player
 
 class GameState {
@@ -13,7 +14,7 @@ class GameState {
     virtual ~GameState(){};
     double combatProbability = 0;
     virtual void printOptions() = 0;
-    virtual void handleInput(std::string, std::stack<GameState*>&, Player&) = 0;
+    virtual void handleInput(int, std::stack<GameState*>&, Player&) = 0;
 };
 
 #endif

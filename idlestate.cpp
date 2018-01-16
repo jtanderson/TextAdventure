@@ -6,18 +6,17 @@ IdleState::IdleState(){
 }
 
 void IdleState::printOptions(){
-  std::cout << "You are sitting at the side of the road\n";
+  printw("You are sitting at the side of the road\n");
   for(auto i=choices.begin(); i!=choices.end(); i++){
-    std::cout << i->first << ". " << i->second << std::endl;
+    printw("%d. %s\n", i->first, i->second.c_str());
   }
 }
 
 IdleState::~IdleState(){}
 
-void IdleState::handleInput(std::string in, std::stack<GameState*>& states, Player& p){
+void IdleState::handleInput(int choice, std::stack<GameState*>& states, Player& p){
   GameState* next = nullptr;
   GameState* old = nullptr;
-  int choice = stoi(in);
 
   switch(choice){
     case CONTINUE_OPTION:
@@ -25,7 +24,7 @@ void IdleState::handleInput(std::string in, std::stack<GameState*>& states, Play
       states.pop();
       delete old;
       p.heal(5);
-      std::cout << "You recover 5 hp...\n";
+      printw("You recover 5 hp...\n");
       next = new IdleState();
       states.push(next);
       break;

@@ -12,22 +12,21 @@ CombatState::CombatState(){
 };
 
 void CombatState::printOptions() {
-  std::cout << "The enemy prepares to attack!\n";
+  printw("The enemy prepares to attack!\n");
   for(auto i = choices.begin(); i != choices.end(); ++i){
-    std::cout << i->first << ". " << i->second << std::endl;
+    printw("%d. %s\n", i->first, i->second.c_str());
   }
 };
 
-void CombatState::handleInput(std::string in, std::stack<GameState*>& stack, Player& p) {
-  int choice = stoi(in);
+void CombatState::handleInput(int choice, std::stack<GameState*>& stack, Player& p) {
   GameState* tmpState;
 
   switch(choice){
     case ATTACK_OPTION:
-      std::cout << "You attack the enemy...\n";
+      printw("You attack the enemy...\n");
       p.attack(enemy);
       if (enemy.isDead()){
-        std::cout << "The enemy is dead!\n";
+        printw("The enemy is dead!\n");
         // TODO: state to loot the body(s)?
         tmpState = stack.top();
         stack.pop();
@@ -35,7 +34,7 @@ void CombatState::handleInput(std::string in, std::stack<GameState*>& stack, Pla
         return;
       }
 
-      std::cout << "The enemy attacks you...\n";
+      printw("The enemy attacks you...\n");
       enemy.attack(p);
       if (p.isDead()){
         // TODO: endGameState

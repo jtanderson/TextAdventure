@@ -31,24 +31,25 @@ TravelState::TravelState(std::string dir){
 }
 
 void TravelState::printOptions(){
-  std::cout << "You are walking " << direction << std::endl;
+  printw("You are walking %s\n", direction.c_str());
   if (hasCrossroad){
-    std::cout << "You see a fork in the road, headed " << newDirection << std::endl;
+    printw("You see a fork in the road, headed %s\n.", newDirection.c_str());
   }
+  printw("\n");
   for(auto i = choices.begin(); i!=choices.end(); i++){
-    std::cout << i->first << ". " << i->second << std::endl;
+    printw("%d. %s\n", i->first, i->second.c_str());
   }
+  refresh();
 }
 
 TravelState::~TravelState(){};
 
-void TravelState::handleInput(std::string in, std::stack<GameState*>& states, Player& p){
-  int choice = std::stoi(in);
+void TravelState::handleInput(int choice, std::stack<GameState*>& states, Player& p){
   GameState* nextState = nullptr;
 
   switch (choice){
     case CONTINUE_OPTION:
-      std::cout << "\nYou continue walking...\n";
+      printw("You continue walking...\n");
       delete states.top();
       states.pop();
 
@@ -60,14 +61,14 @@ void TravelState::handleInput(std::string in, std::stack<GameState*>& states, Pl
       states.push(nextState);
       break;
     case FORK_OPTION:
-      std::cout << "\nYou take the fork...\n";
+      printw("You take the fork.\n");
       delete states.top();
       states.pop();
       nextState = new TravelState(newDirection);
       states.push(nextState);
       break;
     default:
-      std::cout << "Invalid option.\n";
+      printw("Invalid option.\n");
       break;
   };
 }
