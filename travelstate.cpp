@@ -35,8 +35,8 @@ void TravelState::printOptions(){
   if (hasCrossroad){
     std::cout << "You see a fork in the road, headed " << newDirection << std::endl;
   }
-  for(int i = 1; i<choices.size() + 1; i++){
-    std::cout << i << ". " << choices[i] << std::endl;
+  for(auto i = choices.begin(); i!=choices.end(); i++){
+    std::cout << i->first << ". " << i->second << std::endl;
   }
 }
 

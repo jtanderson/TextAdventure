@@ -7,8 +7,8 @@ IdleState::IdleState(){
 
 void IdleState::printOptions(){
   std::cout << "You are sitting at the side of the road\n";
-  for(int i=1; i<=2; i++){
-    std::cout << (i) << ". " << choices[i] << std::endl;
+  for(auto i=choices.begin(); i!=choices.end(); i++){
+    std::cout << i->first << ". " << i->second << std::endl;
   }
 }
 
