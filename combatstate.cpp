@@ -9,6 +9,7 @@ CombatState::CombatState(){
 
   choices[ATTACK_OPTION] = "Attack the enemy.";
   choices[FLEE_OPTION]   = "Try to run away.";
+  choices[POWER_ATTACK_OPTION] = "Swing wildly.";
 };
 
 void CombatState::printOptions() {
@@ -44,7 +45,7 @@ void CombatState::handleInput(std::string in, std::stack<GameState*>& stack, Pla
       }
       break;
     case FLEE_OPTION:
-      std::cout << "You attemt to flee from the fight...\n";
+      std::cout << "You attempt to flee from the fight...\n";
       if (rand()%100 + 1 > 50){
         std::cout << "You successfully retreat from the fight...\n";
         tmpState = stack.top();
@@ -55,6 +56,25 @@ void CombatState::handleInput(std::string in, std::stack<GameState*>& stack, Pla
         enemy.attack(p);
       }
       break;
+    case POWER_ATTACK_OPTION:
+      std::cout << "You swing wildly!\n";
+      p.powerAttack(enemy);
+      if (enemy.isDead()){
+        std::cout << "The enemy is dead!\n";
+        // TODO: state to loot the body(s)?
+        tmpState = stack.top();
+        stack.pop();
+        delete tmpState;
+        return;
+      }
+
+      std::cout << "The enemy attacks you...\n";
+      enemy.attack(p);
+      if (p.isDead()){
+        // TODO: endGameState
+        std::cout << "You have died :(\n";
+        exit(0);
+      }
     default:
       break;
   };

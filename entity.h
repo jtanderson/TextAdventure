@@ -28,6 +28,7 @@ class LivingEntity : public Entity {
     virtual ~LivingEntity();
     virtual void printStats();
     void attack(LivingEntity&);
+    void powerAttack(LivingEntity&);
     bool isDead();
     void heal(int);
 };
