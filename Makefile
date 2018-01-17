@@ -3,10 +3,12 @@ CFLAGS = -std=c++11 -Wall -O3
 LDFLAGS = -I. -lncurses -ltinfo
 OBJ = obj
 
+OBJFILES = $(addprefix $(OBJ)/,main.o combatstate.o idlestate.o travelstate.o livingentity.o player.o npc.o display.o)
+
 all: main
 
-main: $(addprefix $(OBJ)/,main.o combatstate.o idlestate.o travelstate.o livingentity.o player.o npc.o)
-	$(GCC) -o main $(CFLAGS) $(addprefix $(OBJ)/,main.o combatstate.o idlestate.o travelstate.o livingentity.o player.o npc.o) $(LDFLAGS)
+main: $(OBJFILES)
+	$(GCC) -o main $(CFLAGS) $(OBJFILES) $(LDFLAGS)
 
 $(OBJ)/main.o: main.cpp gamestate.h entity.h travelstate.h
 	$(GCC) -c $(CFLAGS) main.cpp -o $(OBJ)/main.o $(LDFLAGS)
@@ -28,6 +30,9 @@ $(OBJ)/player.o: player.cpp entity.h
 
 $(OBJ)/npc.o: npc.cpp entity.h
 	$(GCC) -c $(CFLAGS) npc.cpp -o $(OBJ)/npc.o $(LDFLAGS)
+
+$(OBJ)/display.o: display.h display.cpp
+	$(GCC) -c $(CFLAGS) display.cpp -o $(OBJ)/display.o $(LDFLAGS)
 
 clean:
 	rm -rf $(OBJ)/*.o

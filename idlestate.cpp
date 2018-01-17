@@ -6,9 +6,9 @@ IdleState::IdleState(){
 }
 
 void IdleState::printOptions(){
-  printw("You are sitting at the side of the road\n");
+  wprintw(Display::text_win, "You are sitting at the side of the road\n");
   for(auto i=choices.begin(); i!=choices.end(); i++){
-    printw("%d. %s\n", i->first, i->second.c_str());
+    wprintw(Display::text_win, "%d. %s\n", i->first, i->second.c_str());
   }
 }
 
@@ -24,7 +24,7 @@ void IdleState::handleInput(int choice, std::stack<GameState*>& states, Player& 
       states.pop();
       delete old;
       p.heal(5);
-      printw("You recover 5 hp...\n");
+      wprintw(Display::text_win, "You recover 5 hp...\n");
       next = new IdleState();
       states.push(next);
       break;

@@ -5,6 +5,7 @@
 #include <stack>
 #include <ncurses.h>
 #include "entity.h" // Player
+#include "display.h"
 
 class GameState {
   protected:
