@@ -46,13 +46,13 @@ void LivingEntity::powerAttack(LivingEntity& enemy){
     // TODO: D&D style combat rolls
     // TODO: text return/output
     int atk_roll = rand() % 20 - 2;
-    std::cout << this->name << " rolled " << atk_roll << std::endl;
+    printw("%s rolled %d.\n", this->name.c_str(), atk_roll);
 
     if (atk_roll + atk_mod > enemy.armor + 10){
-        std::cout << this->name << " managed to hit " << enemy.name << " with a wild strike!" << std::endl;
+        printw("%s managed to hit %s.\n", this->name.c_str(), enemy.name.c_str());
         enemy.hp_curr -= this->dmg + 3;
      }
     else {
-        std::cout << this->name << " misses " << enemy.name << std::endl;
+        printw("%s misses %s.\n", this->name.c_str(), enemy.name.c_str());
     }
 };

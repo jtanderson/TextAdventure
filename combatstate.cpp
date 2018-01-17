@@ -39,27 +39,28 @@ void CombatState::handleInput(int choice, std::stack<GameState*>& stack, Player&
       enemy.attack(p);
       if (p.isDead()){
         // TODO: endGameState
-        std::cout << "You have died :(\n";
+        printw("You have died :(\n");
+        endwin();
         exit(0);
       }
       break;
     case FLEE_OPTION:
-      std::cout << "You attempt to flee from the fight...\n";
+      printw("You attempt to flee from the fight...\n");
       if (rand()%100 + 1 > 50){
-        std::cout << "You successfully retreat from the fight...\n";
+        printw("You successfully retreat from the fight...\n");
         tmpState = stack.top();
         stack.pop();
         delete tmpState;
       } else {
-        std::cout << "You could not escape, and the enemy attacks you!\n";
+        printw("You could not escape, and the enemy attacks you!\n");
         enemy.attack(p);
       }
       break;
     case POWER_ATTACK_OPTION:
-      std::cout << "You swing wildly!\n";
+      printw("You swing wildly!\n");
       p.powerAttack(enemy);
       if (enemy.isDead()){
-        std::cout << "The enemy is dead!\n";
+        printw("The enemy is dead!\n");
         // TODO: state to loot the body(s)?
         tmpState = stack.top();
         stack.pop();
@@ -67,11 +68,12 @@ void CombatState::handleInput(int choice, std::stack<GameState*>& stack, Player&
         return;
       }
 
-      std::cout << "The enemy attacks you...\n";
+      printw("The enemy attacks you...\n");
       enemy.attack(p);
       if (p.isDead()){
         // TODO: endGameState
-        std::cout << "You have died :(\n";
+        printw("You have died :(\n");
+        endwin();
         exit(0);
       }
     default:
