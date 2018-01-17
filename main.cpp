@@ -29,7 +29,7 @@ int main(){
     if (currentState->combatProbability > 0){
       combatRoll = rand() % 100 + 1;
       if (combatRoll < currentState->combatProbability){
-        printw("You get attacked!\n");
+        wprintw(Display::text_win, "You get attacked!\n");
         cs = new CombatState();
         stateStack.push(cs);
         currentState = cs;

@@ -24,8 +24,8 @@ namespace Display {
     wrefresh(main_win);
 
     text_win = newwin(height-sub_h-2, width-2, 1, 1);
-    wrefresh(text_win);
     scrollok(text_win, TRUE);
+    wrefresh(text_win);
 
     map_win = newwin(sub_h, sub_w, height-sub_h, 0);
     box(map_win, 0, 0);
