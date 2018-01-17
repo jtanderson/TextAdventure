@@ -4,14 +4,23 @@
 #include <iostream>
 #include <stdlib.h>
 #include <ncurses.h>
-#include <item.h>
+#include <list>
+#include "item.h"
 
 class Inventory {
+  protected:
+    std::list<Item> itemList;
+    
   public:
     Inventory(){};
-    virtual ~Inventory(){};
+    ~Inventory(){};
 
-    Inventory::addItem(Item&);
+    void addItem(Item&); //Loot 
+    void useItem(Item&); //Consumable
+    void buyItem(Item&); //From a vendor (super NYI)
+    void sellItem(Item&);//Sell at any time for *value*
+
+    void displayInventory(); //Render inventory screen to gear_win 
 };
 
 
