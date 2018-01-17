@@ -1,13 +1,12 @@
-#include <iostream>
-#include <stack>
+#include <stack> // std::stack
 #include <stdlib.h>
-#include <time.h>
+#include <time.h> // time
 #include <ncurses.h>
-#include "gamestate.h"
-#include "travelstate.h"
-#include "idlestate.h"
-#include "combatstate.h"
+#include "gamestate.h" // GameState
+#include "travelstate.h" // TravelState
+#include "combatstate.h" // CombatState
 #include "entity.h" // Player
+#include "display.h" // Display
 
 int main(){
   char input;
@@ -15,13 +14,10 @@ int main(){
   Player pc(20,5,10,5,"Human","Jimbo");
   int combatRoll;
   CombatState* cs;
-
-  initscr();
-  noecho();
-
+  Display::init();
   srand(time(0));
 
-  clear();
+  wrefresh(Display::text_win);
 
   GameState* currentState = nullptr;
   TravelState* t = new TravelState("North");
@@ -41,10 +37,13 @@ int main(){
     }
 
     currentState->printOptions();
-    refresh();
+
+    wrefresh(Display::text_win);
+
     input = getch();
-    clear();
-    //printw("You pressed %c", input);
+
+    wclear(Display::text_win);
+
     currentState->handleInput(atoi(&input), stateStack, pc);
   }
 

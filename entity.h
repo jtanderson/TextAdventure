@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ncurses.h>
+#include "display.h"
 
 class Entity {
   public:

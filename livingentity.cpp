@@ -16,15 +16,15 @@ void LivingEntity::heal(int h){
 };
 
 void LivingEntity::printStats(){
-  printw("====== STATS ======\n");
-  printw("Type:     %s\n", type.c_str());
-  printw("Name:     %s\n", name.c_str());
-  printw("HP Max:   %d\n", hp_max);
-  printw("HP Curr:  %d\n", hp_curr);
-  printw("Atk Mod:  %d\n", atk_mod);
-  printw("Armor:    %d\n", armor);
-  printw("Damage:   %d\n", dmg);
-  printw("===================\n");
+  wprintw(Display::text_win, "====== STATS ======\n");
+  wprintw(Display::text_win, "Type:     %s\n", type.c_str());
+  wprintw(Display::text_win, "Name:     %s\n", name.c_str());
+  wprintw(Display::text_win, "HP Max:   %d\n", hp_max);
+  wprintw(Display::text_win, "HP Curr:  %d\n", hp_curr);
+  wprintw(Display::text_win, "Atk Mod:  %d\n", atk_mod);
+  wprintw(Display::text_win, "Armor:    %d\n", armor);
+  wprintw(Display::text_win, "Damage:   %d\n", dmg);
+  wprintw(Display::text_win, "===================\n");
 };
 
 void LivingEntity::attack(LivingEntity& enemy){
@@ -32,13 +32,13 @@ void LivingEntity::attack(LivingEntity& enemy){
   // TODO: text return/output
   int atk_roll = rand() % 20 + 1;
 
-  printw("%s rolled %d\n", this->name.c_str(), atk_roll);
+  wprintw(Display::text_win, "%s rolled %d\n", this->name.c_str(), atk_roll);
 
   if (atk_roll + atk_mod > enemy.armor + 10){
-    printw("%s hits %s\n", this->name.c_str(), enemy.name.c_str());
+    wprintw(Display::text_win, "%s hits %s\n", this->name.c_str(), enemy.name.c_str());
     enemy.hp_curr -= this->dmg;
   } else {
-    printw("%s misses %s\n", this->name.c_str(), enemy.name.c_str());
+    wprintw(Display::text_win, "%s misses %s\n", this->name.c_str(), enemy.name.c_str());
   }
 };
 
@@ -46,13 +46,13 @@ void LivingEntity::powerAttack(LivingEntity& enemy){
     // TODO: D&D style combat rolls
     // TODO: text return/output
     int atk_roll = rand() % 20 - 2;
-    printw("%s rolled %d.\n", this->name.c_str(), atk_roll);
+    wprintw(Display::text_win, "%s rolled %d.\n", this->name.c_str(), atk_roll);
 
     if (atk_roll + atk_mod > enemy.armor + 10){
-        printw("%s managed to hit %s.\n", this->name.c_str(), enemy.name.c_str());
+        wprintw(Display::text_win, "%s managed to hit %s.\n", this->name.c_str(), enemy.name.c_str());
         enemy.hp_curr -= this->dmg + 3;
      }
     else {
-        printw("%s misses %s.\n", this->name.c_str(), enemy.name.c_str());
+        wprintw(Display::text_win, "%s misses %s.\n", this->name.c_str(), enemy.name.c_str());
     }
 };
