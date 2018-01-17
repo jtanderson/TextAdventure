@@ -61,11 +61,16 @@ void TravelState::handleInput(int choice, std::stack<GameState*>& states, Player
       states.push(nextState);
       break;
     case FORK_OPTION:
-      wprintw(Display::text_win, "You take the fork.\n");
-      delete states.top();
-      states.pop();
-      nextState = new TravelState(newDirection);
-      states.push(nextState);
+      if (hasCrossroad) {
+        wprintw(Display::text_win, "You take the fork.\n");
+        delete states.top();
+        states.pop();
+        nextState = new TravelState(newDirection);
+        states.push(nextState);
+       }
+      else {
+        wprintw(Display::text_win, "You take a look around, trying to decide what to do.\n");
+      }
       break;
     default:
       wprintw(Display::text_win, "Invalid option.\n");
