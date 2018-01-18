@@ -5,7 +5,7 @@ CFLAGS = -std=c++11 -Wall -O3
 LDFLAGS = -I. -lncurses -ltinfo
 OBJDIR = obj
 
-CLASSES = combatstate idlestate travelstate livingentity player npc display inventory item
+CLASSES = entity combatstate idlestate travelstate livingentity player npc display inventory item logger
 OBJECTS = $(addsuffix .o, $(CLASSES))
 OBJFILES = $(addprefix $(OBJDIR)/, $(OBJECTS))
 
