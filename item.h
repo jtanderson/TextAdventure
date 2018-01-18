@@ -3,16 +3,16 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include "entity.h"
+#include "display.h" // Display
 
 class Item {
   protected:
     int value;
     std::string name;
   public:
-    Item(){};
-    virtual ~Item(){};
-    void printItem();
+    Item();
+    virtual ~Item();
+    void display();
 };
 
 #endif

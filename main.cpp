@@ -23,6 +23,8 @@ int main(){
   TravelState* t = new TravelState("North");
   stateStack.push(t);
 
+  pc.printInventory();
+
   while(true){
     currentState = stateStack.top();
 

@@ -2,7 +2,8 @@
 
 namespace Display {
 
-  WINDOW *main_win, *text_win, *map_win, *gear_win;
+  WINDOW *main_win, *text_win, *map_win, *gear_win,
+         *gear_win_container, *map_win_container;
 
   void init(){
     int width, height;
@@ -27,12 +28,19 @@ namespace Display {
     scrollok(text_win, TRUE);
     wrefresh(text_win);
 
-    map_win = newwin(sub_h, sub_w, height-sub_h, 0);
-    box(map_win, 0, 0);
+    map_win_container = newwin(sub_h, sub_w, height-sub_h, 0);
+    box(map_win_container, 0, 0);
+    wrefresh(map_win_container);
+
+    gear_win_container = newwin(sub_h, sub_w+(width%2), height-sub_h, sub_w);
+    box(gear_win_container, 0, 0);
+    wrefresh(gear_win_container);
+
+    map_win = newwin(sub_h-2, sub_w-2, height-sub_h+1, 1);
     wrefresh(map_win);
 
-    gear_win = newwin(sub_h, sub_w+(width%2), height-sub_h, sub_w);
-    box(gear_win, 0, 0);
+    gear_win = newwin(sub_h-2, sub_w+(width%2)-2, height-sub_h+1, sub_w+1);
     wrefresh(gear_win);
+
   };
 }

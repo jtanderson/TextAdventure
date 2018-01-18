@@ -12,15 +12,15 @@ class Inventory {
     std::list<Item> itemList;
     
   public:
-    Inventory(){};
-    ~Inventory(){};
+    Inventory();
+    ~Inventory();
 
     void addItem(Item&); //Loot 
     void useItem(Item&); //Consumable
     void buyItem(Item&); //From a vendor (super NYI)
     void sellItem(Item&);//Sell at any time for *value*
 
-    void displayInventory(); //Render inventory screen to gear_win 
+    void display(); //Render inventory screen to gear_win 
 };
 
 

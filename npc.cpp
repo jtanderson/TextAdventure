@@ -1,4 +1,4 @@
-#include "entity.h"
+#include "npc.h"
 
 Npc::Npc(){};
 

@@ -4,7 +4,7 @@
 #include <map>
 #include <stack>
 #include <ncurses.h>
-#include "entity.h" // Player
+#include "player.h" // Player
 #include "display.h"
 
 class GameState {

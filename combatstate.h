@@ -4,7 +4,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include "gamestate.h" // GameState
-#include "entity.h" // Player, Npc
+#include "player.h" // Player
+#include "npc.h" // Npc
 
 class CombatState : public GameState {
   private:
