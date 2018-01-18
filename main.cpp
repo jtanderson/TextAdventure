@@ -18,7 +18,7 @@ void interrupt(int i){
   exit(i);
 };
 
-int main(){
+int main(int argc, char** argv){
  
   // Needs to come first in case any ctors use logging
   Logger::init(Logger::DEBUG);
