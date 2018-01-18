@@ -44,7 +44,6 @@ namespace Logger {
 
   void write(int level, const char* fmt, va_list args){
     if ( log_level <= level ){
-      vprintf(fmt, args);
       vfprintf(log_file, fmt, args);
       fflush(log_file);
     }
