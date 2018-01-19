@@ -18,7 +18,7 @@ Class hierarchy:
 
 ## TODO
 
-- [ ] use ncurses library for user interface
+- [x] use ncurses library for user interface
    - http://www.cs.ukzn.ac.za/~hughm/os/notes/ncurses.html
    - [ ] add some sort of map component
    - [ ] add some sort of inventory/equipment/stat visualization
@@ -37,3 +37,4 @@ Class hierarchy:
 - [ ] dungeons/buildings
 - [ ] special items/abilities
 - [ ] player death, game ending
+- [x] logging system
