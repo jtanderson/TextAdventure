@@ -11,7 +11,7 @@ Class hierarchy:
   - CombatState (`combatstate.h`, `combatstate.cpp`)
   - TravelState (`travelstate.h`, `travelstate.cpp`)
   - IdleState (`idlestate.h`, `idlestate.cpp`)
-- Entity (`entity.h`) - abstract
+- Entity (`entity.h`)
   - LivingEntity (`livingentity.h`, `livingentity.cpp`)
     - Player (`player.h`, `player.cpp`)
     - Npc (`npc.h`, `npc.cpp`)
