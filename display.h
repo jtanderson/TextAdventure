@@ -1,5 +1,5 @@
 #ifndef DISPLAY
-#define DISPALY
+#define DISPLAY
 
 #include <ncurses.h>
 #include <string>
