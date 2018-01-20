@@ -11,14 +11,14 @@ Class hierarchy:
   - CombatState (`combatstate.h`, `combatstate.cpp`)
   - TravelState (`travelstate.h`, `travelstate.cpp`)
   - IdleState (`idlestate.h`, `idlestate.cpp`)
-- Entity (`entity.h`) - abstract
-  - LivingEntity (`entity.h`, `livingentity.cpp`)
-    - Player (`entity.h`, `player.cpp`)
-    - Npc (`entity.h`, `npc.cpp`)
+- Entity (`entity.h`)
+  - LivingEntity (`livingentity.h`, `livingentity.cpp`)
+    - Player (`player.h`, `player.cpp`)
+    - Npc (`npc.h`, `npc.cpp`)
 
 ## TODO
 
-- [ ] use ncurses library for user interface
+- [x] use ncurses library for user interface
    - http://www.cs.ukzn.ac.za/~hughm/os/notes/ncurses.html
    - [ ] add some sort of map component
    - [ ] add some sort of inventory/equipment/stat visualization
@@ -37,3 +37,4 @@ Class hierarchy:
 - [ ] dungeons/buildings
 - [ ] special items/abilities
 - [ ] player death, game ending
+- [x] logging system
