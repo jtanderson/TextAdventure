@@ -3,6 +3,8 @@
 #include <time.h> // time
 #include <ncurses.h>
 #include <csignal>
+#include <getopt.h>
+#include <iostream>
 
 #include "gamestate.h" // GameState
 #include "travelstate.h" // TravelState
@@ -10,6 +12,7 @@
 #include "entity.h" // Player
 #include "display.h" // Display
 #include "logger.h" // Logger
+#include "world.h"
 
 void interrupt(int i){
   Logger::debug("Closing...\n");
@@ -19,7 +22,10 @@ void interrupt(int i){
 };
 
 int main(int argc, char** argv){
- 
+  // TODO: use gnu getopt to parse the args
+
+  setlocale(LC_ALL, "");
+
   // Needs to come first in case any ctors use logging
   Logger::init(Logger::DEBUG);
   Logger::debug("Loading...\n");
@@ -30,8 +36,10 @@ int main(int argc, char** argv){
   CombatState* cs;
 
   Player pc(20,5,10,5,"Human","Jimbo");
+  World world;
 
   signal(SIGINT, interrupt);
+
 
   Display::init();
   srand(time(0));
@@ -45,6 +53,8 @@ int main(int argc, char** argv){
   pc.printInventory();
 
   while(true){
+    world.drawMap(0,0);
+
     currentState = stateStack.top();
 
     if (currentState->combatProbability > 0){
@@ -68,7 +78,6 @@ int main(int argc, char** argv){
     currentState->handleInput(atoi(&input), stateStack, pc);
   }
 
-  // TODO: also do this on sigint
   endwin();
   Logger::close();
 
