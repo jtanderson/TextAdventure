@@ -9,5 +9,5 @@ Item::~Item() {};
 
 // renamed for consistency and brevity
 void Item::display() {
-  wprintw(Display::text_win, "%s\n", this->name);
+  wprintw(Display::text_win, "%s\n", this->name.c_str());
 }
