@@ -2,8 +2,17 @@
 
 GCC = g++
 CFLAGS = -std=c++11 -Wall -O3
-LDFLAGS = -I. -lncursesw -ltinfo
+LDFLAGS = -I. -lncurses
 OBJDIR = obj
+
+UNAME = $(shell uname -s)
+ifeq ($(UNAME),Linux)
+	LDFLAGS += -ltinfo
+endif
+
+ifeq ($(UNAME),Darwin)
+	#nothing extra yet
+endif
 
 CLASSES = entity combatstate idlestate travelstate livingentity player npc display inventory item logger util world worldlocation
 OBJECTS = $(addsuffix .o, $(CLASSES))
@@ -14,12 +23,12 @@ all: main
 main: $(OBJDIR)/main.o $(OBJFILES)
 	$(GCC) -o main $(CFLAGS) $(OBJDIR)/main.o $(OBJFILES) $(LDFLAGS)
 
-$(OBJDIR)/main.o: main.cpp gamestate.h entity.h travelstate.h
-	$(GCC) -c $(CFLAGS) main.cpp -o $(OBJDIR)/main.o $(LDFLAGS)
+$(OBJDIR)/main.o: main.cpp
+	$(GCC) -c $(CFLAGS) main.cpp -o $(OBJDIR)/main.o
 
 .SECONDEXPANSION:
 $(OBJFILES): %.o: $$(notdir %.cpp %.h)
-	$(GCC) -c $(CFLAGS) $< -o $@ $(LDFLAGS)
+	$(GCC) -c $(CFLAGS) $< -o $@
 
 clean:
 	rm -rf $(OBJDIR)/*.o
