@@ -14,6 +14,60 @@
 #include "display.h" // Display
 #include "logger.h" // Logger
 #include "world.h"
+#include "roadlocation.h"
+
+void interrupt();
+
+void init(int argc, char** argv);
+
+int main(int argc, char** argv){
+  // This needs to happen first
+  init(argc, argv);
+
+  char input;
+  std::stack<GameState*> stateStack;
+  int combatRoll;
+  CombatState* cs;
+
+  Player pc(20,5,10,5,"Human","Jimbo");
+  World world;
+  GameState* currentState = nullptr;
+  TravelState* t = new TravelState(world.getLocationAt(0,0),World::North);
+  stateStack.push(t);
+
+  pc.printInventory();
+
+  while(true){
+    world.drawMap(pc.getPos());
+
+    currentState = stateStack.top();
+
+    if (currentState->combatProbability > 0){
+      combatRoll = rand() % 100 + 1;
+      if (combatRoll < currentState->combatProbability){
+        wprintw(Display::text_win, "You get attacked!\n");
+        cs = new CombatState();
+        stateStack.push(cs);
+        currentState = cs;
+      }
+    }
+
+    currentState->printOptions();
+
+    wrefresh(Display::text_win);
+
+    input = getch();
+
+    wclear(Display::text_win);
+
+    currentState->handleInput(atoi(&input), stateStack, pc, world);
+  }
+
+  endwin();
+  Logger::close();
+
+  return 0;
+}
 
 void interrupt(int i){
   Logger::debug("Closing...\n");
@@ -92,55 +146,6 @@ void init(int argc, char** argv){
 
   // Seed the rng
   srand(time(0));
-
 }
 
-int main(int argc, char** argv){
-  // TODO: use gnu getopt to parse the args
 
-  init(argc, argv);
-
-  char input;
-  std::stack<GameState*> stateStack;
-  int combatRoll;
-  CombatState* cs;
-
-  Player pc(20,5,10,5,"Human","Jimbo");
-  World world;
-  GameState* currentState = nullptr;
-  TravelState* t = new TravelState("North");
-  stateStack.push(t);
-
-  pc.printInventory();
-
-  while(true){
-    world.drawMap(pc.getPos());
-
-    currentState = stateStack.top();
-
-    if (currentState->combatProbability > 0){
-      combatRoll = rand() % 100 + 1;
-      if (combatRoll < currentState->combatProbability){
-        wprintw(Display::text_win, "You get attacked!\n");
-        cs = new CombatState();
-        stateStack.push(cs);
-        currentState = cs;
-      }
-    }
-
-    currentState->printOptions();
-
-    wrefresh(Display::text_win);
-
-    input = getch();
-
-    wclear(Display::text_win);
-
-    currentState->handleInput(atoi(&input), stateStack, pc);
-  }
-
-  endwin();
-  Logger::close();
-
-  return 0;
-}

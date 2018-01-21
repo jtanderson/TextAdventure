@@ -19,7 +19,7 @@ class IdleState : public GameState {
 
     void printOptions() override;
 
-    void handleInput(int, std::stack<GameState*>&, Player&) override;
+    void handleInput(int,std::stack<GameState*>&,Player&,World&) override;
 };
 
 #endif

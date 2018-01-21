@@ -7,12 +7,19 @@
 
 #include "display.h"
 #include "worldlocation.h"
+#include "roadlocation.h"
 #include "logger.h"
 
 class World {
-  // For efficiency, may want to store pointers instead
-  // of actual objects
-  std::map<std::pair<int,int>, WorldLocation> cells;
+  public:
+    enum Direction {
+      North = 1,
+      South = 2,
+      East  = 3,
+      West  = 4
+    };
+  private:
+    std::map<std::pair<int,int>, WorldLocation*> cells;
 
   public:
     World();
@@ -21,6 +28,8 @@ class World {
     // center (x,y)
     void drawMap(int, int);
     void drawMap(std::pair<int,int>);
+    WorldLocation* getLocationAt(std::pair<int, int>);
+    WorldLocation* getLocationAt(int, int);
 };
 
 #endif

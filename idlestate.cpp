@@ -14,7 +14,7 @@ void IdleState::printOptions(){
 
 IdleState::~IdleState(){}
 
-void IdleState::handleInput(int choice, std::stack<GameState*>& states, Player& p){
+void IdleState::handleInput(int choice, std::stack<GameState*>& states, Player& p, World& w){
   GameState* next = nullptr;
   GameState* old = nullptr;
 

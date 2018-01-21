@@ -19,7 +19,7 @@ void CombatState::printOptions() {
   }
 };
 
-void CombatState::handleInput(int choice, std::stack<GameState*>& stack, Player& p) {
+void CombatState::handleInput(int choice, std::stack<GameState*>& stack, Player& p, World& w) {
   GameState* tmpState;
 
   switch(choice){

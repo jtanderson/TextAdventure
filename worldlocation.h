@@ -6,20 +6,27 @@
 #include "display.h"
 
 class WorldLocation {
-  private:
-  enum Type{};
-  const char* map_glyph;
+  protected:
+    enum Type{};
 
-  enum Glyphs {
-    player_glyph = 'X'
-  };
+    enum Glyph {
+      player_glyph = 'X'
+    };
+
+    const char* map_glyph;
+    std::pair<int,int> coords;
 
   public:
-    WorldLocation();
-    ~WorldLocation();
+    WorldLocation(int, int);
+    WorldLocation(int, int, WorldLocation*);
+    //WorldLocation(const char*);
 
+    std::pair<int,int> getCoords();
+    virtual ~WorldLocation();
     // x, y
-    void render(int,int);
+    virtual void render(int,int);
+
+    virtual WorldLocation* connect(int) = 0;
 };
 
 #endif

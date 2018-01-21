@@ -1,7 +1,7 @@
 #include "world.h"
 
 World::World(){
-  cells[std::make_pair(0,0)] = WorldLocation();
+  cells[std::make_pair(0,0)] = new RoadLocation(0,0,RoadLocation::NorthSouth);
 }
 
 World::~World(){
@@ -19,18 +19,34 @@ void World::drawMap(int x, int y){
   int left = x - mapw/2;
   int top = y + maph/2;
 
+  WorldLocation* currentLoc = getLocationAt(x,y);
+
   Logger::debug("drawing centered at (%d,%d)\n",x,y);
   wclear(Display::map_win);
 
   // Generate cells adjacent to (x,y)
-  for(int i=y+1; i>y-2; i--){
-    for(int j=x-1; j<x+2; j++){
-      auto test = cells.find(std::make_pair(j,i));
-      if (test == cells.end()){
-        Logger::debug("generating (%d,%d)\n",j,i);
-        cells[std::make_pair(j,i)] = WorldLocation();
-      }
-    }
+  auto test = cells.find(std::make_pair(x-1,y));
+  if (test == cells.end()){
+    //Logger::debug("generating (%d,%d)\n",j,i);
+    cells[std::make_pair(x-1,y)] = currentLoc->connect(West);
+  }
+
+  test = cells.find(std::make_pair(x,y+1));
+  if (test == cells.end()){
+    //Logger::debug("generating (%d,%d)\n",j,i);
+    cells[std::make_pair(x,y+1)] = currentLoc->connect(North);
+  }
+
+  test = cells.find(std::make_pair(x,y-1));
+  if (test == cells.end()){
+    //Logger::debug("generating (%d,%d)\n",j,i);
+    cells[std::make_pair(x,y-1)] = currentLoc->connect(South);
+  }
+
+  test = cells.find(std::make_pair(x+1,y));
+  if (test == cells.end()){
+    //Logger::debug("generating (%d,%d)\n",j,i);
+    cells[std::make_pair(x+1,y)] = currentLoc->connect(East);
   }
 
   //Logger::debug("checking from cell (%d, %d) to (%d, %d)\n", x, y, x+width, y+height);
@@ -43,15 +59,30 @@ void World::drawMap(int x, int y){
       //Logger::debug("checking cell (%d, %d)\n", i, j);
       auto search = cells.find(std::make_pair(j,i));
       if(i == y && j == x){
-        mvwaddch(Display::map_win, row, col, 'X');
+        mvwaddstr(Display::map_win, row, col, "\u25A3");
       } else if(search != cells.end()){
         Logger::debug("drawing cell (%d, %d)\n", j, i);
-        search->second.render(row, col);
+        search->second->render(row, col);
       }
       col++;
     }
     row++;
   }
   wrefresh(Display::map_win);
+}
+
+WorldLocation* World::getLocationAt(std::pair<int,int> l){
+  return getLocationAt(l.first, l.second);
+}
+
+WorldLocation* World::getLocationAt(int x, int y){
+  auto search = cells.find(std::make_pair(x,y));
+  if(search != cells.end()){
+    return search->second;
+  } else {
+    // Since we only move one at a time, and all adjacent
+    // get generated, should be fine for now...
+    throw "Location invalid!";
+  }
 }
 
