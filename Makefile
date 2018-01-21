@@ -2,16 +2,17 @@
 
 GCC = g++
 CFLAGS = -std=c++11 -Wall -O3
-LDFLAGS = -I. -lncurses
+LDFLAGS = -I.
 OBJDIR = obj
 
 UNAME = $(shell uname -s)
 ifeq ($(UNAME),Linux)
-	LDFLAGS += -ltinfo
+	LDFLAGS += -lncursesw -ltinfo
 endif
 
 ifeq ($(UNAME),Darwin)
-	#nothing extra yet
+	# Apple ncurses has wide char support built in
+	LDFLAGS += -lncurses
 endif
 
 CLASSES = entity combatstate idlestate travelstate livingentity player npc display inventory item logger util world worldlocation
