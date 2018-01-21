@@ -19,11 +19,15 @@ void World::drawMap(int x, int y){
   int left = x - mapw/2;
   int top = y + maph/2;
 
+  Logger::debug("drawing centered at (%d,%d)\n",x,y);
+  wclear(Display::map_win);
+
   // Generate cells adjacent to (x,y)
-  for(int i=y-1; i<y+2; i++){
+  for(int i=y+1; i>y-2; i--){
     for(int j=x-1; j<x+2; j++){
       auto test = cells.find(std::make_pair(j,i));
       if (test == cells.end()){
+        Logger::debug("generating (%d,%d)\n",j,i);
         cells[std::make_pair(j,i)] = WorldLocation();
       }
     }
