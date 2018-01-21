@@ -20,12 +20,13 @@ Class hierarchy:
 
 - [x] use ncurses library for user interface
    - http://www.cs.ukzn.ac.za/~hughm/os/notes/ncurses.html
-   - [ ] add some sort of map component
+   - [x] add some sort of map component
    - [ ] add some sort of inventory/equipment/stat visualization
+- [ ] More detailed map locations (road, landmarks, etc.)
 - [ ] richer text/storytelling components
    - [ ] break combat messages up into individual particpants' turns
 - [ ] better world generation
-- [ ] data structure to store/access world
+- [x] data structure to store/access world
 - [ ] better, more detailed, npc system
 - [ ] saving/loading
 - [ ] friendly npc's
