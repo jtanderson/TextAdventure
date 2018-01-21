@@ -6,8 +6,13 @@
 #include "display.h"
 
 class WorldLocation {
+  private:
   enum Type{};
-  char map_glyph;
+  const char* map_glyph;
+
+  enum Glyphs {
+    player_glyph = 'X'
+  };
 
   public:
     WorldLocation();

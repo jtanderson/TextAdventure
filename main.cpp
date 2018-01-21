@@ -5,6 +5,7 @@
 #include <csignal>
 #include <getopt.h>
 #include <iostream>
+#include <locale.h>
 
 #include "gamestate.h" // GameState
 #include "travelstate.h" // TravelState
@@ -40,11 +41,12 @@ int main(int argc, char** argv){
 
   signal(SIGINT, interrupt);
 
-
   Display::init();
   srand(time(0));
 
-  wrefresh(Display::text_win);
+  //mvwaddstr(Display::text_win, 10, 10, "\u2605");
+  //wrefresh(Display::text_win);
+  //getch();
 
   GameState* currentState = nullptr;
   TravelState* t = new TravelState("North");
@@ -53,7 +55,7 @@ int main(int argc, char** argv){
   pc.printInventory();
 
   while(true){
-    world.drawMap(0,0);
+    world.drawMap(pc.getPos());
 
     currentState = stateStack.top();
 

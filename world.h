@@ -10,6 +10,8 @@
 #include "logger.h"
 
 class World {
+  // For efficiency, may want to store pointers instead
+  // of actual objects
   std::map<std::pair<int,int>, WorldLocation> cells;
 
   public:
@@ -18,6 +20,7 @@ class World {
 
     // center (x,y)
     void drawMap(int, int);
+    void drawMap(std::pair<int,int>);
 };
 
 #endif

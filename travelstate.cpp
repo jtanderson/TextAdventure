@@ -50,6 +50,15 @@ void TravelState::handleInput(int choice, std::stack<GameState*>& states, Player
   switch (choice){
     case CONTINUE_OPTION:
       wprintw(Display::text_win, "You continue walking...\n");
+      if(direction == "North"){
+        p.moveNorth();
+      } else if(direction == "South"){
+        p.moveSouth();
+      } else if(direction == "East"){
+        p.moveEast();
+      } else if(direction == "West"){
+        p.moveWest();
+      }
       delete states.top();
       states.pop();
 
