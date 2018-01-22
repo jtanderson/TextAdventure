@@ -14,6 +14,7 @@ class Player : public LivingEntity {
     Player(int, int, int, int, std::string, std::string);
     virtual ~Player();
     void printInventory();
+    void lootItem();
     std::pair<int,int> getPos();
     void moveNorth();
     void moveSouth();

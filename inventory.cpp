@@ -10,7 +10,8 @@ Inventory::~Inventory(){};
 
 // Renamed to display because "Inventory" is implied
 void Inventory::display() {
-  wprintw(Display::gear_win, "tempDisplay");
+  wclear(Display::gear_win);
+  wprintw(Display::gear_win, "Bag:\n");
   
   // replacing for brevity
   //for (std::list<Item>::iterator it = itemList.begin(); itr != itemList.end();)
@@ -19,7 +20,7 @@ void Inventory::display() {
     //Figure out how to display each item
     it->display(); // equiv to (*it).display();
   }
-  wprintw(Display::gear_win, "tempDisplay");
+  //wprintw(Display::gear_win, "tempDisplay");
   wrefresh(Display::gear_win);
 }
 
@@ -28,7 +29,16 @@ void Inventory::addItem(Item& item) {
 }
 
 void Inventory::useItem(Item& item) {
-  //itemList.erase(item); // needs a position index or iterator
+
+  for (auto it = itemList.begin(); it != itemList.end();++it)
+  {
+    Item tempItem = *it;
+    if (item.name == tempItem.name)
+    {
+      itemList.erase(it);
+    }
+  }
+  
 }
 
 void Inventory::buyItem(Item& item) {} //NYI

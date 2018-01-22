@@ -14,6 +14,11 @@ void Player::printInventory(){
   inv.display();
 };
 
+void Player::lootItem() {
+  Item testItem;
+  inv.addItem(testItem);
+}
+
 std::pair<int,int> Player::getPos(){
   return map_loc;
 }

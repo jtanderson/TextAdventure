@@ -35,9 +35,10 @@ int main(int argc, char** argv){
   TravelState* t = new TravelState(world.getLocationAt(0,0),World::North);
   stateStack.push(t);
 
-  pc.printInventory();
+  //pc.printInventory();
 
   while(true){
+    pc.printInventory();
     world.drawMap(pc.getPos());
 
     currentState = stateStack.top();

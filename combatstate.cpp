@@ -27,8 +27,9 @@ void CombatState::handleInput(int choice, std::stack<GameState*>& stack, Player&
       wprintw(Display::text_win, "You attack the enemy...\n");
       p.attack(enemy);
       if (enemy.isDead()){
-        wprintw(Display::text_win, "The enemy is dead!\n");
+        wprintw(Display::text_win, "The enemy is dead! Collect your loot.\n");
         // TODO: state to loot the body(s)?
+        p.lootItem();
         tmpState = stack.top();
         stack.pop();
         delete tmpState;

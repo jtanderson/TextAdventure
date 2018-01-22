@@ -7,9 +7,9 @@
 
 class Item {
   protected:
+  public:
     int value;
     std::string name;
-  public:
     Item();
     virtual ~Item();
     void display();

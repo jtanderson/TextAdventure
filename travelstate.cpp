@@ -72,6 +72,7 @@ void TravelState::handleInput(int choice, std::stack<GameState*>& states, Player
       nextState = new IdleState();
       states.push(nextState);
       break;
+      /*
     case FORK_OPTION:
       if (hasCrossroad) {
         wprintw(Display::text_win, "You take the fork.\n");
@@ -83,7 +84,7 @@ void TravelState::handleInput(int choice, std::stack<GameState*>& states, Player
       else {
         wprintw(Display::text_win, "You take a look around, trying to decide what to do.\n");
       }
-      break;
+      break;*/
     default:
       wprintw(Display::text_win, "Invalid option.\n");
       break;
