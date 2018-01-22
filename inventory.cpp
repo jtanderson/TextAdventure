@@ -11,16 +11,17 @@ Inventory::~Inventory(){};
 // Renamed to display because "Inventory" is implied
 void Inventory::display() {
   wclear(Display::gear_win);
-  wprintw(Display::gear_win, "Bag:\n");
-  
-  // replacing for brevity
-  //for (std::list<Item>::iterator it = itemList.begin(); itr != itemList.end();)
+
+  // get the screen size 
+  //int maxItems, mapw; // height of the window is the max number of items we can display, seems to always be 13?
+  //getmaxyx(Display::gear_win, maxItems, mapw);
+  wprintw(Display::gear_win, "[=======] BAG [=======]\n");
+
   for (auto it = itemList.begin(); it != itemList.end();++it)
   {
-    //Figure out how to display each item
+    wprintw(Display::gear_win, " -> ");
     it->display(); // equiv to (*it).display();
   }
-  //wprintw(Display::gear_win, "tempDisplay");
   wrefresh(Display::gear_win);
 }
 
