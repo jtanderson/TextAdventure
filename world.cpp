@@ -25,6 +25,7 @@ void World::drawMap(int x, int y){
   wclear(Display::map_win);
 
   // Generate cells adjacent to (x,y)
+  //
   auto test = cells.find(std::make_pair(x-1,y));
   if (test == cells.end()){
     //Logger::debug("generating (%d,%d)\n",j,i);
@@ -84,5 +85,20 @@ WorldLocation* World::getLocationAt(int x, int y){
     // get generated, should be fine for now...
     throw "Location invalid!";
   }
-}
+};
 
+std::map<int, std::string> World::DirNames = {
+  {World::North, "North"},
+  {World::South, "South"},
+  {World::East,  "East"},
+  {World::West,  "West"}
+};
+
+std::string World::getDirName(int d){
+  auto search = DirNames.find(d);
+  if (search != DirNames.end()){
+    return search->second;
+  } else {
+    return "";
+  }
+};

@@ -12,4 +12,23 @@ namespace Util {
     generate_n(back_inserter(result), len, generator);
     return result;
   }
+
+  std::pair<int,int> getSide(std::pair<int,int> c,int d){
+    std::pair<int,int> new_loc = c;
+    switch(d){
+      case World::North:
+        new_loc.second++;
+        break;
+      case World::South:
+        new_loc.second--;
+        break;
+      case World::East:
+        new_loc.first++;
+        break;
+      case World::West:
+        new_loc.first++;
+        break;
+    };
+    return new_loc;
+  }
 }

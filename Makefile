@@ -15,7 +15,7 @@ ifeq ($(UNAME),Darwin)
 	LDFLAGS += -lncurses
 endif
 
-CLASSES = entity combatstate idlestate travelstate livingentity player npc display inventory item logger util world worldlocation roadlocation
+CLASSES = entity combatstate idlestate travelstate livingentity player npc display inventory item logger util world worldlocation roadlocation wildernesslocation
 OBJECTS = $(addsuffix .o, $(CLASSES))
 OBJFILES = $(addprefix $(OBJDIR)/, $(OBJECTS))
 

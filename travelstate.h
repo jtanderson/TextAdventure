@@ -25,13 +25,6 @@ class TravelState : public GameState {
     // The direction of the crossroad
     std::string newDirection = "";
 
-    std::map<int, std::string> dirs = {
-      {World::North, "North"},
-      {World::South, "South"},
-      {World::East,  "East"},
-      {World::West,  "West"}
-    };
-
     // Choice constants
     enum Choices{
       CONTINUE_OPTION = 1,

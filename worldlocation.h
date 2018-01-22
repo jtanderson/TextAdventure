@@ -26,6 +26,7 @@ class WorldLocation {
     // x, y
     virtual void render(int,int);
 
+    // takes direction
     virtual WorldLocation* connect(int) = 0;
 };
 

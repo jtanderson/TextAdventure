@@ -4,44 +4,32 @@ TravelState::TravelState(WorldLocation* l, int d) : loc(l), dir(d) {
   // TODO: validate the type and direction
   // TODO: set options based on roadlocation
   
-  combatProbability = 30;
-  //direction = dirs[dir];
+  combatProbability = 20;
 
-  /*
-  if ( rand()%10 + 1 > 7 ){ // 30% chance
-    hasCrossroad = true;
-    std::list<std::string> dirs;
-    if( direction != "South" )
-      dirs.push_front("North");
-    if( direction != "North" )
-      dirs.push_front("South");
-    if( direction != "West" )
-      dirs.push_front("East");
-    if( direction != "East" )
-      dirs.push_front("West");
-
-    dirs.remove(direction);
-    newDirection = *std::next(dirs.begin(), rand()%dirs.size());
-  } else {
-    hasCrossroad = false;
-  }
-  */
+  direction = World::getDirName(dir);
 
   hasCrossroad = false;
   newDirection = "";
 
-  choices[CONTINUE_OPTION] = "Keep walking.";
+  choices[CONTINUE_OPTION] = "Keep walking " + direction + ".";
   choices[SIT_OPTION] = "Sit and rest.";
+  
+  /*
   if (hasCrossroad){
     choices[FORK_OPTION] = "Take the " + newDirection + " fork.";
   }
+  */
 }
 
 void TravelState::printOptions(){
-  wprintw(Display::text_win, "You are walking %s\n", dirs[dir].c_str());
+  wprintw(Display::text_win, "You are walking %s\n", direction.c_str());
+
+  /*
   if (hasCrossroad){
     wprintw(Display::text_win, "You see a fork in the road, headed %s\n.", newDirection.c_str());
   }
+  */
+
   wprintw(Display::text_win, "\n");
   for(auto i = choices.begin(); i!=choices.end(); i++){
     wprintw(Display::text_win, "%d. %s\n", i->first, i->second.c_str());

@@ -3,16 +3,21 @@
 
 #include "world.h"
 #include "worldlocation.h"
+#include "wildernesslocation.h"
+#include "util.h"
 
 class RoadLocation : public WorldLocation {
   private:
-    //bool dirs[4]; // {north, south, east, west}
+    std::map<int,bool> connections; // {north, south, east, west}
     int type;
 
   public:
     RoadLocation(int, int, int);
+    RoadLocation(std::pair<int,int>, int);
     int getType();
     WorldLocation* connect(int) override;
+
+    static int connectionsToType(std::map<int,bool>);
 
     enum Type {
       NorthSouth = 1,
