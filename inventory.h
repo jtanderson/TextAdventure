@@ -10,7 +10,7 @@
 class Inventory {
   protected:
     std::list<Item> itemList;
-    
+    unsigned int maxItems = 12; //could be dynamic but this is fine for now
   public:
     Inventory();
     ~Inventory();

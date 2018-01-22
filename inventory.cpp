@@ -15,8 +15,21 @@ void Inventory::display() {
   // get the screen size 
   //int maxItems, mapw; // height of the window is the max number of items we can display, seems to always be 13?
   //getmaxyx(Display::gear_win, maxItems, mapw);
-  wprintw(Display::gear_win, "[=======] BAG [=======]\n");
 
+  //Display bag header
+  wprintw(Display::gear_win, "BAG [");
+  //Display capacity in top line, ' ' is free slot, '=' is filled slot
+  for (unsigned int it = 0; it != maxItems-1; it++) {
+    if (it < itemList.size()) {
+      wprintw(Display::gear_win, "=");
+    }
+    else {
+      wprintw(Display::gear_win, " ");
+    }
+  }
+  wprintw(Display::gear_win, "] %d / %d \n", itemList.size(), maxItems);
+
+  //Display bag contents
   for (auto it = itemList.begin(); it != itemList.end();++it)
   {
     wprintw(Display::gear_win, " -> ");
@@ -26,7 +39,9 @@ void Inventory::display() {
 }
 
 void Inventory::addItem(Item& item) {
-  itemList.push_back(item);
+  if (itemList.size() < maxItems) {
+    itemList.push_back(item);
+  }
 }
 
 void Inventory::useItem(Item& item) {
