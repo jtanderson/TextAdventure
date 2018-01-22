@@ -83,6 +83,8 @@ int RoadLocation::getType(){
 
 WorldLocation* RoadLocation::connect(int side) {
   WorldLocation* newloc = nullptr;
+  bool needStraight = true;
+
   if (connections[side]){
     std::map<int,bool> newConnections = {
       {World::North, false},
@@ -95,13 +97,23 @@ WorldLocation* RoadLocation::connect(int side) {
     // 70% to keep going straight
     if (rand()%100 + 1 <= 70){
       newConnections[side] = true;
+      needStraight = false;
     }
     // 20% to turn to either side
     if (rand()%100 + 1 <= 20){
       newConnections[(side%2 + 1)] = true;
+      needStraight = false;
     }
     if (rand()%100 + 1 <= 20){
       newConnections[-1*(side%2 + 1)] = true;
+      needStraight = false;
+    }
+
+    // If all failed, make it straight
+    // TODO: just make a dead-end type?
+    if (needStraight){
+      Logger::debug("Need to extend road\n");
+      newConnections[side] = true;
     }
 
     newloc = new RoadLocation(Util::getSide(coords,side), connectionsToType(newConnections));
@@ -177,6 +189,23 @@ int RoadLocation::connectionsToType(std::map<int,bool> conns){
   if (search != str_to_type.end()){
     return search->second;
   } else {
+    Logger::err("Road type not found: %s\n", str.c_str());
     return 0;
+  }
+}
+
+void RoadLocation::addOptions(std::map<int,std::string>& opts) {
+  // Have to assume for now that options always start at 1
+  if (connections[World::North]){
+    opts[opts.size()+1] = "Walk North.";
+  }
+  if (connections[World::South]){
+    opts[opts.size()+1] = "Walk South.";
+  }
+  if (connections[World::East]){
+    opts[opts.size()+1] = "Walk East.";
+  }
+  if (connections[World::West]){
+    opts[opts.size()+1] = "Walk West.";
   }
 }

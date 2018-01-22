@@ -13,3 +13,5 @@ WildernessLocation::~WildernessLocation(){};
 WorldLocation* WildernessLocation::connect(int side){
   return new WildernessLocation(Util::getSide(coords, side));
 };
+
+void WildernessLocation::addOptions(std::map<int,std::string>&){};

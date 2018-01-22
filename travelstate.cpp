@@ -13,6 +13,8 @@ TravelState::TravelState(WorldLocation* l, int d) : loc(l), dir(d) {
 
   choices[CONTINUE_OPTION] = "Keep walking " + direction + ".";
   choices[SIT_OPTION] = "Sit and rest.";
+
+  loc->addOptions(choices);
   
   /*
   if (hasCrossroad){

@@ -10,14 +10,14 @@ class RoadLocation : public WorldLocation {
   private:
     std::map<int,bool> connections; // {north, south, east, west}
     int type;
+    static int connectionsToType(std::map<int,bool>);
 
   public:
     RoadLocation(int, int, int);
     RoadLocation(std::pair<int,int>, int);
     int getType();
     WorldLocation* connect(int) override;
-
-    static int connectionsToType(std::map<int,bool>);
+    void addOptions(std::map<int,std::string>&) override;
 
     enum Type {
       NorthSouth = 1,

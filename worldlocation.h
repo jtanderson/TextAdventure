@@ -2,6 +2,8 @@
 #define WORLDLOCATION_H
 
 #include <ncurses.h>
+#include <map>
+
 #include "logger.h"
 #include "display.h"
 
@@ -28,6 +30,8 @@ class WorldLocation {
 
     // takes direction
     virtual WorldLocation* connect(int) = 0;
+
+    virtual void addOptions(std::map<int,std::string>&) = 0;
 };
 
 #endif

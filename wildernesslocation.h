@@ -11,6 +11,7 @@ class WildernessLocation : public WorldLocation {
     ~WildernessLocation();
 
     WorldLocation* connect(int) override;
+    void addOptions(std::map<int,std::string>&) override;
 };
 
 #endif
