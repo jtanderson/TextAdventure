@@ -88,7 +88,7 @@ void init(int argc, char** argv){
 
   while (1) {
     static struct option long_options[] = {
-      {"help",     no_argument,       0, '?'},
+      {"help",     no_argument,       0, 'h'},
       {"log-level", required_argument, 0, 'l'},
       {0, 0, 0, 0}
     };
