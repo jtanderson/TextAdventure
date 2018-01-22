@@ -135,8 +135,9 @@ void init(int argc, char** argv){
     }
   }
 
+  // TODO: make this default to ERROR
   if (!has_log_option){
-    Logger::init(Logger::ERROR);
+    Logger::init(Logger::DEBUG);
   }
 
   Logger::debug("Loading...\n");
