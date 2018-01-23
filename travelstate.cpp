@@ -6,7 +6,7 @@ TravelState::TravelState(WorldLocation* l, int d) : loc(l), dir(d) {
   
   combatProbability = 20;
 
-  direction = World::getDirName(dir);
+  direction = Util::getDirName(dir);
 
   hasCrossroad = false;
   newDirection = "";

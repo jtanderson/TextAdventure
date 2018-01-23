@@ -16,19 +16,35 @@ namespace Util {
   std::pair<int,int> getSide(std::pair<int,int> c,int d){
     std::pair<int,int> new_loc = c;
     switch(d){
-      case World::North:
+      case Util::North:
         new_loc.second++;
         break;
-      case World::South:
+      case Util::South:
         new_loc.second--;
         break;
-      case World::East:
+      case Util::East:
         new_loc.first++;
         break;
-      case World::West:
+      case Util::West:
         new_loc.first++;
         break;
     };
     return new_loc;
   }
+
+  std::string getDirName(int d){
+    std::map<int, std::string> DirNames = {
+      {Util::North, "North"},
+      {Util::South, "South"},
+      {Util::East,  "East"},
+      {Util::West,  "West"}
+    };
+
+    auto search = DirNames.find(d);
+    if (search != DirNames.end()){
+      return search->second;
+    } else {
+      return "";
+    }
+  };
 }

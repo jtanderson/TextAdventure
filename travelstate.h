@@ -8,7 +8,8 @@
 #include <map>
 #include "gamestate.h"
 #include "idlestate.h"
-#include "world.h"
+//#include "world.h"
+class World;
 #include "worldlocation.h"
 #include "roadlocation.h"
 

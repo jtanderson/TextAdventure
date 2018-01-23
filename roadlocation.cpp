@@ -5,72 +5,72 @@ RoadLocation::RoadLocation(std::pair<int,int> c, int t) : RoadLocation(c.first, 
 RoadLocation::RoadLocation(int x, int y, int t) : WorldLocation(x,y) {
   type = t;
 
-  connections[World::North] = false;
-  connections[World::South] = false;
-  connections[World::East] = false;
-  connections[World::West] = false;
+  connections[Util::North] = false;
+  connections[Util::South] = false;
+  connections[Util::East] = false;
+  connections[Util::West] = false;
 
   switch(type){
     case NorthSouth:
       map_glyph = "\u2503";
-      connections[World::North] = true;
-      connections[World::South] = true;
+      connections[Util::North] = true;
+      connections[Util::South] = true;
       break;
     case NorthWest:
       map_glyph = "\u251B";
-      connections[World::North] = true;
-      connections[World::West] = true;
+      connections[Util::North] = true;
+      connections[Util::West] = true;
       break;
     case NorthEast:
       map_glyph = "\u2517";
-      connections[World::North] = true;
-      connections[World::East] = true;
+      connections[Util::North] = true;
+      connections[Util::East] = true;
       break;
     case SouthEast:
       map_glyph = "\u250F";
-      connections[World::South] = true;
-      connections[World::East] = true;
+      connections[Util::South] = true;
+      connections[Util::East] = true;
       break;
     case SouthWest:
       map_glyph = "\u2513";
-      connections[World::South] = true;
-      connections[World::West] = true;
+      connections[Util::South] = true;
+      connections[Util::West] = true;
       break;
     case EastWest:
       map_glyph = "\u2501";
-      connections[World::East] = true;
-      connections[World::West] = true;
+      connections[Util::East] = true;
+      connections[Util::West] = true;
       break;
     case NorthSouthEast:
       map_glyph = "\u2523";
-      connections[World::North] = true;
-      connections[World::South] = true;
-      connections[World::East] = true;
+      connections[Util::North] = true;
+      connections[Util::South] = true;
+      connections[Util::East] = true;
       break;
     case NorthSouthWest:
       map_glyph = "\u252B";
-      connections[World::North] = true;
-      connections[World::South] = true;
-      connections[World::West] = true;
+      connections[Util::North] = true;
+      connections[Util::South] = true;
+      connections[Util::West] = true;
       break;
     case NorthEastWest:
       map_glyph = "\u253B";
-      connections[World::North] = true;
-      connections[World::East] = true;
-      connections[World::West] = true;
+      connections[Util::North] = true;
+      connections[Util::East] = true;
+      connections[Util::West] = true;
       break;
     case SouthEastWest:
       map_glyph = "\u2533";
-      connections[World::South] = true;
-      connections[World::East] = true;
-      connections[World::West] = true;
+      connections[Util::South] = true;
+      connections[Util::East] = true;
+      connections[Util::West] = true;
       break;
     case NorthSouthEastWest:
       map_glyph = "\u254B";
-      connections[World::North] = true;
-      connections[World::South] = true;
-      connections[World::East] = true;
-      connections[World::West] = true;
+      connections[Util::North] = true;
+      connections[Util::South] = true;
+      connections[Util::East] = true;
+      connections[Util::West] = true;
       break;
     default:
       break;
@@ -87,10 +87,10 @@ WorldLocation* RoadLocation::connect(int side) {
 
   if (connections[side]){
     std::map<int,bool> newConnections = {
-      {World::North, false},
-      {World::South, false},
-      {World::East, false},
-      {World::West, false}
+      {Util::North, false},
+      {Util::South, false},
+      {Util::East, false},
+      {Util::West, false}
     };
 
     newConnections[-1*side] = true;
@@ -140,16 +140,16 @@ int RoadLocation::connectionsToType(std::map<int,bool> conns){
   };
 
   std::string str = "";
-  if (conns[World::North]){
+  if (conns[Util::North]){
     str += "North";
   }
-  if (conns[World::South]){
+  if (conns[Util::South]){
     str += "South";
   }
-  if (conns[World::East]){
+  if (conns[Util::East]){
     str += "East";
   }
-  if (conns[World::West]){
+  if (conns[Util::West]){
     str += "West";
   }
 
@@ -166,7 +166,7 @@ void RoadLocation::addOptions(std::map<int,std::string>& opts) {
   // Have to assume for now that options always start at 1
   for (auto it=connections.begin(); it!=connections.end(); ++it){
     if (it->second){
-      opts[opts.size()+1] = "Walk " + World::getDirName(it->first);
+      opts[opts.size()+1] = "Walk " + Util::getDirName(it->first);
       choices[opts.size()] = it->first;
     }
   }

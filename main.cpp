@@ -32,7 +32,7 @@ int main(int argc, char** argv){
   Player pc(20,5,10,5,"Human","Jimbo");
   World world;
   GameState* currentState = nullptr;
-  TravelState* t = new TravelState(world.getLocationAt(0,0),World::North);
+  TravelState* t = new TravelState(world.getLocationAt(0,0),Util::North);
   stateStack.push(t);
 
   //pc.printInventory();

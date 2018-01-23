@@ -4,6 +4,7 @@
 #include<iostream>
 #include<stdlib.h>
 #include "gamestate.h"
+#include "player.h"
 #include "travelstate.h"
 
 class IdleState : public GameState {

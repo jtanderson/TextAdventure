@@ -29,25 +29,25 @@ void World::drawMap(int x, int y){
   auto test = cells.find(std::make_pair(x-1,y));
   if (test == cells.end()){
     //Logger::debug("generating (%d,%d)\n",j,i);
-    cells[std::make_pair(x-1,y)] = currentLoc->connect(West);
+    cells[std::make_pair(x-1,y)] = currentLoc->connect(Util::West);
   }
 
   test = cells.find(std::make_pair(x,y+1));
   if (test == cells.end()){
     //Logger::debug("generating (%d,%d)\n",j,i);
-    cells[std::make_pair(x,y+1)] = currentLoc->connect(North);
+    cells[std::make_pair(x,y+1)] = currentLoc->connect(Util::North);
   }
 
   test = cells.find(std::make_pair(x,y-1));
   if (test == cells.end()){
     //Logger::debug("generating (%d,%d)\n",j,i);
-    cells[std::make_pair(x,y-1)] = currentLoc->connect(South);
+    cells[std::make_pair(x,y-1)] = currentLoc->connect(Util::South);
   }
 
   test = cells.find(std::make_pair(x+1,y));
   if (test == cells.end()){
     //Logger::debug("generating (%d,%d)\n",j,i);
-    cells[std::make_pair(x+1,y)] = currentLoc->connect(East);
+    cells[std::make_pair(x+1,y)] = currentLoc->connect(Util::East);
   }
 
   //Logger::debug("checking from cell (%d, %d) to (%d, %d)\n", x, y, x+width, y+height);
@@ -84,21 +84,5 @@ WorldLocation* World::getLocationAt(int x, int y){
     // Since we only move one at a time, and all adjacent
     // get generated, should be fine for now...
     throw "Location invalid!";
-  }
-};
-
-std::map<int, std::string> World::DirNames = {
-  {World::North, "North"},
-  {World::South, "South"},
-  {World::East,  "East"},
-  {World::West,  "West"}
-};
-
-std::string World::getDirName(int d){
-  auto search = DirNames.find(d);
-  if (search != DirNames.end()){
-    return search->second;
-  } else {
-    return "";
   }
 };
