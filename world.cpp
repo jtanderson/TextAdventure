@@ -28,25 +28,25 @@ void World::drawMap(int x, int y){
   //
   auto test = cells.find(std::make_pair(x-1,y));
   if (test == cells.end()){
-    //Logger::debug("generating (%d,%d)\n",j,i);
+    Logger::debug("generating (%d,%d)\n",x-1,y);
     cells[std::make_pair(x-1,y)] = currentLoc->connect(Util::West);
   }
 
   test = cells.find(std::make_pair(x,y+1));
   if (test == cells.end()){
-    //Logger::debug("generating (%d,%d)\n",j,i);
+    Logger::debug("generating (%d,%d)\n",x,y+1);
     cells[std::make_pair(x,y+1)] = currentLoc->connect(Util::North);
   }
 
   test = cells.find(std::make_pair(x,y-1));
   if (test == cells.end()){
-    //Logger::debug("generating (%d,%d)\n",j,i);
+    Logger::debug("generating (%d,%d)\n",x,y-1);
     cells[std::make_pair(x,y-1)] = currentLoc->connect(Util::South);
   }
 
   test = cells.find(std::make_pair(x+1,y));
   if (test == cells.end()){
-    //Logger::debug("generating (%d,%d)\n",j,i);
+    Logger::debug("generating (%d,%d)\n",x+1,y);
     cells[std::make_pair(x+1,y)] = currentLoc->connect(Util::East);
   }
 

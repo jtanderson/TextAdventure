@@ -33,6 +33,19 @@ namespace Util {
   }
 
   std::string getDirName(int d){
+    switch(d){
+      case North:
+        return "North";
+      case South:
+        return "South";
+      case East:
+        return "East";
+      case West:
+        return "West";
+      default:
+        return "";
+    };
+    /*
     std::map<int, std::string> DirNames = {
       {Util::North, "North"},
       {Util::South, "South"},
@@ -46,5 +59,6 @@ namespace Util {
     } else {
       return "";
     }
+    */
   };
 }

@@ -18,10 +18,6 @@ class Player : public LivingEntity {
     void printInventory();
     void lootItem();
     std::pair<int,int> getPos();
-    void moveNorth();
-    void moveSouth();
-    void moveEast();
-    void moveWest();
     void move(int);
 };
 
