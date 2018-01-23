@@ -1,9 +1,11 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <utility> // pair
+
 #include "livingentity.h"
 #include "display.h"
-#include <utility> // pair
+#include "util.h"
 
 class Player : public LivingEntity {
   private:
@@ -20,6 +22,7 @@ class Player : public LivingEntity {
     void moveSouth();
     void moveEast();
     void moveWest();
+    void move(int);
 };
 
 #endif

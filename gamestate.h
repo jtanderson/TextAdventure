@@ -4,6 +4,7 @@
 #include <map>
 #include <stack>
 #include <ncurses.h>
+
 #include "player.h" // Player
 #include "display.h"
 #include "world.h"

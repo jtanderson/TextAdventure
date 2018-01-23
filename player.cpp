@@ -41,3 +41,7 @@ void Player::moveEast(){
 void Player::moveWest(){
   map_loc = std::make_pair(map_loc.first-1, map_loc.second);
 }
+
+void Player::move(int d){
+  map_loc = Util::getSide(map_loc,d);
+}

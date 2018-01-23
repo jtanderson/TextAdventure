@@ -120,38 +120,6 @@ WorldLocation* RoadLocation::connect(int side) {
   } else {
     newloc = new WildernessLocation(Util::getSide(coords,side));
   }
-  /*
-  switch (side){
-    case World::North:
-      if(connections[World::North]){
-        newloc = new RoadLocation(coords.first, coords.second+1, NorthSouth);
-      } else {
-        newloc = new WildernessLocation(coords.first, coords.second+1);
-      }
-      break;
-    case World::South:
-      if(connections[World::South]){
-        newloc = new RoadLocation(coords.first, coords.second-1, NorthSouth);
-      } else {
-        newloc = new WildernessLocation(coords.first, coords.second-1);
-      }
-      break;
-    case World::East:
-      if(connections[World::East]){
-        newloc = new RoadLocation(coords.first+1, coords.second, EastWest);
-      } else {
-        newloc = new WildernessLocation(coords.first+1, coords.second);
-      }
-      break;
-    case World::West:
-      if(connections[World::West]){
-        newloc = new RoadLocation(coords.first-1, coords.second, EastWest);
-      } else {
-        newloc = new WildernessLocation(coords.first-1, coords.second);
-      }
-      break;
-  };
-  */
 
   return newloc;
 }
@@ -196,16 +164,24 @@ int RoadLocation::connectionsToType(std::map<int,bool> conns){
 
 void RoadLocation::addOptions(std::map<int,std::string>& opts) {
   // Have to assume for now that options always start at 1
-  if (connections[World::North]){
-    opts[opts.size()+1] = "Walk North.";
+  for (auto it=connections.begin(); it!=connections.end(); ++it){
+    if (it->second){
+      opts[opts.size()+1] = "Walk " + World::getDirName(it->first);
+      choices[opts.size()] = it->first;
+    }
   }
-  if (connections[World::South]){
-    opts[opts.size()+1] = "Walk South.";
+}
+
+void RoadLocation::handleInput(int choice,std::stack<GameState*>& stack,Player& p,World& w) {
+  auto search = choices.find(choice);
+  if (search==choices.end()){
+    wprintw(Display::text_win, "Invalid choice.\n");
+    Logger::err("Invalid choice: %d\n", choice);
+    return;
   }
-  if (connections[World::East]){
-    opts[opts.size()+1] = "Walk East.";
-  }
-  if (connections[World::West]){
-    opts[opts.size()+1] = "Walk West.";
-  }
+
+  p.move(search->second);
+  delete stack.top();
+  stack.pop();
+  stack.push(new TravelState(w.getLocationAt(p.getPos()), search->second));
 }

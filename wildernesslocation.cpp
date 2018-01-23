@@ -15,3 +15,5 @@ WorldLocation* WildernessLocation::connect(int side){
 };
 
 void WildernessLocation::addOptions(std::map<int,std::string>&){};
+
+void WildernessLocation::handleInput(int, std::stack<GameState*>&, Player&, World&){};

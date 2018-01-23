@@ -12,6 +12,7 @@ class WildernessLocation : public WorldLocation {
 
     WorldLocation* connect(int) override;
     void addOptions(std::map<int,std::string>&) override;
+    void handleInput(int, std::stack<GameState*>&, Player&, World&) override;
 };
 
 #endif

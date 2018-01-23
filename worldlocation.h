@@ -3,9 +3,18 @@
 
 #include <ncurses.h>
 #include <map>
+#include <stack>
 
 #include "logger.h"
 #include "display.h"
+//#include "player.h"
+//#include "world.h"
+//#include "gamestate.h"
+
+// Forward declarations are evil
+class GameState;
+class Player;
+class World;
 
 class WorldLocation {
   protected:
@@ -32,6 +41,8 @@ class WorldLocation {
     virtual WorldLocation* connect(int) = 0;
 
     virtual void addOptions(std::map<int,std::string>&) = 0;
+
+    virtual void handleInput(int, std::stack<GameState*>&, Player&, World&) = 0;
 };
 
 #endif
