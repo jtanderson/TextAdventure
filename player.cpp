@@ -15,8 +15,11 @@ void Player::printInventory(){
 };
 
 void Player::lootItem() {
-  Item testItem;
-  inv.addItem(testItem);
+  int newGold = rand() % 10;
+  inv.addGold(newGold);
+
+  Item newItem;
+  inv.addItem(newItem);
 }
 
 std::pair<int,int> Player::getPos(){

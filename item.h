@@ -7,9 +7,15 @@
 
 class Item {
   protected:
+    void generateItem();
   public:
     int value;
     std::string name;
+    int boostAtk;   //Boost attack roll
+    int boostDmg;   //Boost attack dmg
+    int boostHp;    //Boost health maximum
+    int boostArmor; //Boost AC
+
     Item();
     virtual ~Item();
     void display();

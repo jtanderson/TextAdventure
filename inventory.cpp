@@ -27,7 +27,7 @@ void Inventory::display() {
       wprintw(Display::gear_win, " ");
     }
   }
-  wprintw(Display::gear_win, "] %d / %d \n", itemList.size(), maxItems);
+  wprintw(Display::gear_win, "] %d / %d -- %dgp\n", itemList.size(), maxItems, gold);
 
   //Display bag contents
   for (auto it = itemList.begin(); it != itemList.end();++it)
@@ -59,7 +59,20 @@ void Inventory::useItem(Item& item) {
 
 void Inventory::buyItem(Item& item) {} //NYI
 
-void Inventory::sellItem(Item& item) { //This can be used anywhere atm
+void Inventory::sellItem(Item& item) { 
+  //This can be used anywhere atm
   //Somehow add gold to the player
-  //itemList.erase(item);
+  for (auto it = itemList.begin(); it != itemList.end();++it)
+  {
+    Item tempItem = *it;
+    if (item.name == tempItem.name)
+    {
+      gold += item.value;
+      itemList.erase(it);
+    }
+  }
+}
+
+void Inventory::addGold(int newGold) {
+  gold += newGold;
 }
