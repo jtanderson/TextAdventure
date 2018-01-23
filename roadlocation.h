@@ -2,6 +2,7 @@
 #define ROADLOCATION_H
 
 #include <stack>
+#include <cmath>
 
 #include "world.h"
 #include "worldlocation.h"

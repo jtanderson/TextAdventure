@@ -84,8 +84,10 @@ int RoadLocation::getType(){
 WorldLocation* RoadLocation::connect(int side) {
   WorldLocation* newloc = nullptr;
   bool needStraight = true;
+  int orth_dir;
 
   if (connections[side]){
+    Logger::debug("Connecting to %s side.\n", Util::getDirName(side).c_str());
     std::map<int,bool> newConnections = {
       {Util::North, false},
       {Util::South, false},
@@ -93,19 +95,27 @@ WorldLocation* RoadLocation::connect(int side) {
       {Util::West, false}
     };
 
+    Logger::debug("Set side index %d to true.\n", -1*side);
+    Logger::debug("New road connects %s.\n", Util::getDirName(-1*side).c_str());
     newConnections[-1*side] = true;
+
+    orth_dir = (std::abs(side)%2)+1;
+
     // 70% to keep going straight
     if (rand()%100 + 1 <= 70){
       newConnections[side] = true;
+      Logger::debug("Adding %s path.\n", Util::getDirName(side).c_str());
       needStraight = false;
     }
     // 20% to turn to either side
     if (rand()%100 + 1 <= 20){
-      newConnections[(side%2 + 1)] = true;
+      Logger::debug("Adding %s path.\n", Util::getDirName(orth_dir).c_str());
+      newConnections[orth_dir] = true;
       needStraight = false;
     }
     if (rand()%100 + 1 <= 20){
-      newConnections[-1*(side%2 + 1)] = true;
+      Logger::debug("Adding %s path.\n", Util::getDirName(-1*orth_dir).c_str());
+      newConnections[-1*orth_dir] = true;
       needStraight = false;
     }
 
