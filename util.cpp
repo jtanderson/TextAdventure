@@ -26,7 +26,7 @@ namespace Util {
         new_loc.first++;
         break;
       case Util::West:
-        new_loc.first++;
+        new_loc.first--;
         break;
     };
     return new_loc;

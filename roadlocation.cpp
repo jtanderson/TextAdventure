@@ -180,6 +180,8 @@ void RoadLocation::handleInput(int choice,std::stack<GameState*>& stack,Player& 
     return;
   }
 
+  //wprintw(Display::text_win, "You walk %s.\n", Util::getDirName(search->second).c_str());
+
   p.move(search->second);
   delete stack.top();
   stack.pop();
