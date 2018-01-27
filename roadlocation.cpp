@@ -176,24 +176,55 @@ void RoadLocation::addOptions(std::map<int,std::string>& opts) {
   // Have to assume for now that options always start at 1
   for (auto it=connections.begin(); it!=connections.end(); ++it){
     if (it->second){
-      opts[opts.size()+1] = "Walk " + Util::getDirName(it->first);
+      opts['0'+opts.size()+1] = "Walk " + Util::getDirName(it->first);
       choices[opts.size()] = it->first;
     }
   }
 }
 
 void RoadLocation::handleInput(int choice,std::stack<GameState*>& stack,Player& p,World& w) {
-  auto search = choices.find(choice);
-  if (search==choices.end()){
-    wprintw(Display::text_win, "Invalid choice.\n");
-    Logger::err("Invalid choice: %d\n", choice);
-    return;
+  int dir = 0;
+
+  Logger::info("RoadLocation handling choice: %d\n", choice);
+
+  switch(choice){
+    case KEY_UP:
+      Logger::debug("Pressed up arrow\n");
+      if (connections[Util::North]){
+        dir = Util::North;
+      }
+      break;
+    case KEY_DOWN:
+      if (connections[Util::South]){
+        dir = Util::South;
+      }
+      break;
+    case KEY_LEFT:
+      if (connections[Util::West]){
+        dir = Util::West;
+      }
+      break;
+    case KEY_RIGHT:
+      if (connections[Util::East]){
+        dir = Util::East;
+      }
+    default:
+      auto search = choices.find(choice-'0');
+      if (search!=choices.end()){
+        dir = search->second;
+      }
+      break;
   }
 
   //wprintw(Display::text_win, "You walk %s.\n", Util::getDirName(search->second).c_str());
 
-  p.move(search->second);
-  delete stack.top();
-  stack.pop();
-  stack.push(new TravelState(w.getLocationAt(p.getPos()), search->second));
+  if (dir != 0){
+    p.move(dir);
+    delete stack.top();
+    stack.pop();
+    stack.push(new TravelState(w.getLocationAt(p.getPos()), dir));
+  } else {
+      wprintw(Display::text_win, "Invalid choice.\n");
+      Logger::err("Invalid choice: %d\n", choice);
+  }
 }

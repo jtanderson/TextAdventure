@@ -4,6 +4,7 @@
 #include <ncurses.h>
 #include <map>
 #include <stack>
+#include <cstdlib>
 
 #include "logger.h"
 #include "display.h"

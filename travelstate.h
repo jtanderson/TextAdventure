@@ -28,9 +28,9 @@ class TravelState : public GameState {
 
     // Choice constants
     enum Choices{
-      SIT_OPTION      = 1,
-      CONTINUE_OPTION = 2,
-      FORK_OPTION     = 3
+      SIT_OPTION      = '1',
+      CONTINUE_OPTION = '2',
+      FORK_OPTION     = '3'
     };
 
   public:

@@ -22,7 +22,7 @@ void TravelState::printOptions(){
 
   wprintw(Display::text_win, "\n");
   for(auto i = choices.begin(); i!=choices.end(); i++){
-    wprintw(Display::text_win, "%d. %s\n", i->first, i->second.c_str());
+    wprintw(Display::text_win, "%c. %s\n", i->first, i->second.c_str());
   }
   refresh();
 }

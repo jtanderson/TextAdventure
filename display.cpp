@@ -27,6 +27,7 @@ namespace Display {
     text_win = newwin(height-sub_h-2, width-2, 1, 1);
     scrollok(text_win, TRUE);
     wrefresh(text_win);
+    keypad(text_win, TRUE);
 
     map_win_container = newwin(sub_h, sub_w, height-sub_h, 0);
     box(map_win_container, 0, 0);

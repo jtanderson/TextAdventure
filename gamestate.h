@@ -4,6 +4,7 @@
 #include <map>
 #include <stack>
 #include <ncurses.h>
+#include <stdlib.h>
 
 //#include "player.h" // Player
 class Player;

@@ -15,14 +15,20 @@ CombatState::CombatState(){
 void CombatState::printOptions() {
   wprintw(Display::text_win, "The enemy prepares to attack!\n");
   for(auto i = choices.begin(); i != choices.end(); ++i){
-    wprintw(Display::text_win, "%d. %s\n", i->first, i->second.c_str());
+    wprintw(Display::text_win, "%c. %s\n", i->first, i->second.c_str());
   }
 };
 
 void CombatState::handleInput(int choice, std::stack<GameState*>& stack, Player& p, World& w) {
   GameState* tmpState;
 
-  switch(choice){
+  Logger::debug("Combat state input: %d\n", choice);
+
+  char c = choice;
+
+  Logger::debug("Combat state input: %c\n", c);
+
+  switch(c){
     case ATTACK_OPTION:
       wprintw(Display::text_win, "You attack the enemy...\n");
       p.attack(enemy);

@@ -10,8 +10,8 @@
 class IdleState : public GameState {
   private:
     enum Choices {
-      CONTINUE_OPTION = 1,
-      LEAVE_OPTION    = 2
+      CONTINUE_OPTION = '1',
+      LEAVE_OPTION    = '2'
     };
 
   public:

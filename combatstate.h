@@ -12,9 +12,9 @@ class CombatState : public GameState {
     Npc enemy;
 
     enum Choices {
-      ATTACK_OPTION = 1,
-      FLEE_OPTION   = 2,
-      POWER_ATTACK_OPTION = 3
+      ATTACK_OPTION = '1',
+      FLEE_OPTION   = '2',
+      POWER_ATTACK_OPTION = '3'
     };
   public:
     CombatState();

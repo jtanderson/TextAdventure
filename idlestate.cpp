@@ -8,7 +8,7 @@ IdleState::IdleState(){
 void IdleState::printOptions(){
   wprintw(Display::text_win, "You are sitting at the side of the road\n");
   for(auto i=choices.begin(); i!=choices.end(); i++){
-    wprintw(Display::text_win, "%d. %s\n", i->first, i->second.c_str());
+    wprintw(Display::text_win, "%c. %s\n", i->first, i->second.c_str());
   }
 }
 

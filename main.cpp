@@ -24,7 +24,7 @@ int main(int argc, char** argv){
   // This needs to happen first
   init(argc, argv);
 
-  char input;
+  int input;
   std::stack<GameState*> stateStack;
   int combatRoll;
   CombatState* cs;
@@ -57,11 +57,11 @@ int main(int argc, char** argv){
 
     wrefresh(Display::text_win);
 
-    input = getch();
+    input = wgetch(Display::text_win);
 
     wclear(Display::text_win);
 
-    currentState->handleInput(atoi(&input), stateStack, pc, world);
+    currentState->handleInput(input, stateStack, pc, world);
   }
 
   endwin();
